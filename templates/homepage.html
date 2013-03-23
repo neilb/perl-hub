@@ -1,0 +1,84 @@
+[% INCLUDE 'header.html' title='The Perl Hub' %]
+
+    <table class="mainContent">
+        <tr>
+        <td>
+            [% FOREACH category IN links %]
+                <div class="linkSection">
+                    <div class="linksTitle">[% category.title %]</div>
+                    <div class="linkList">
+                        [% FOREACH link IN category.links %]
+                            <a href="[% link.url %]" title="[% link.description %]">[% link.title %]</a>[% IF NOT loop.last %], [% END %]
+                        [% END %]
+                    </div>
+                </div>
+            [% END %]
+        </td>
+        <td align=center width=300>[% INCLUDE 'search-boxes.html' %]</td>
+        </tr>
+    </table>
+
+    <div class="feedContainer">
+
+        <div class="feed">
+            <h1 class="feedTitle">Blog posts</h1>
+            <div class=viewport>
+                [% FOREACH post IN blog_posts %]<div class="blogPost">
+                    <h2 class="blogPostTitle"><a href="[% post.url %]">[% post.title %]</a></h2>
+                    <p class=date>[% post.timestamp %]</p>
+                </div>[% END %]
+            </div>
+        </div>
+
+        <div class="feed">
+            <h1 class="feedTitle">CPAN releases</h1>
+            <div class=viewport>
+                [% FOREACH upload IN recent_uploads %]<div class="blogPost">
+                    <h2 class="blogPostTitle"><a href="[% upload.url %]">[% upload.title %]</a></h2>
+                    <p class=date>[% upload.description %]</p>
+                </div>[% END %]
+            </div>
+        </div>
+
+        <div class="feed">
+            <h1 class="feedTitle">Module reviews</h1>
+            <div class=viewport>
+                [% FOREACH rating IN recent_ratings %]<div class="blogPost">
+                    <h2 class="blogPostTitle"><a href="[% rating.url %]">[% rating.title %]</a></h2>
+                    <p class=date>[% rating.description %]</p>
+                </div>[% END %]
+            </div>
+        </div>
+
+        <div class="feed">
+            <h1 class="feedTitle">Module ideas</h1>
+            <div class=viewport>
+                [% FOREACH proposal IN prepan %]<div class="blogPost">
+                    <h2 class="blogPostTitle"><a href="[% proposal.url %]">[% proposal.title %]</a></h2>
+                    <p class=date>[% proposal.description %]</p>
+                </div>[% END %]
+            </div>
+        </div>
+
+        <div class="feed">
+            <h1 class="feedTitle">Upcoming events</h1>
+            <div class=viewport>
+                [% FOREACH event IN events %]<div class="blogPost">
+                    <h2 class="blogPostTitle"><a href="[% event.url %]">[% event.title %]</a></h2>
+                    <p class=date>[% event.description %]</p>
+                </div>[% END %]
+            </div>
+        </div>
+
+        <div class="feed">
+            <h1 class="feedTitle">Recent talks</h1>
+            <div class=viewport>
+                [% FOREACH talk IN recent_talks %]<div class="blogPost">
+                    <h2 class="blogPostTitle"><a href="[% talk.url %]">[% talk.title %]</a></h2>
+                    <p class=date>[% talk.description %]</p>
+                </div>[% END %]
+            </div>
+        </div>
+
+    </div>
+[% INCLUDE 'footer.html' %]

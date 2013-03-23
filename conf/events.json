@@ -1,0 +1,52 @@
+[
+
+    {
+        "title": "Perl QA Hackathon",
+        "url": "http://2013.qa-hackathon.org/qa2013/",
+        "description": "12-14 April 2013"
+    },
+
+    {
+        "title": "Dutch Perl Workshop",
+        "url": "http://www.perlworkshop.nl/nlpw2013/",
+        "description": "19 April 2013"
+    },
+
+    {
+        "title": "DC-Baltimore Perl Workshop",
+        "url": "http://dcbpw.org/dcbpw2013/",
+        "description": "20 April 2013"
+    },
+
+    {
+        "title": "Polish Perl Workshop",
+        "url": "http://act.yapc.eu/plpw2013/",
+        "description": "25-26 May 2013"
+    },
+
+    {
+        "title": "YAPC North America",
+        "url": "http://www.yapcna.org/yn2013/",
+        "description": "3-5 June 2013"
+    },
+
+    {
+        "title": "OSCON 2013",
+        "url": "http://www.oscon.com/oscon2013",
+        "description": "22-26 July 2013"
+    },
+
+    {
+        "title": "YAPC::Europe 2013",
+        "url": "http://act.yapc.eu/ye2013/",
+        "description": "12-14 August 2013"
+    },
+
+    {
+        "title": "YAPC::ASIA",
+        "url": "http://yapcasia.org/2013/",
+        "description": "19-21 September 2013"
+    }
+
+
+]

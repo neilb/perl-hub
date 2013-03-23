@@ -1,0 +1,46 @@
+[
+
+    {
+        "title": "Introduction to OO Perl with Moose",
+        "url": "http://www.slideshare.net/davorg/introduction-to-oo-perl-with-moose",
+        "description": "Dave Cross at London Perl Workshop 2012"
+    },
+
+    {
+        "title": "Perl memory use",
+        "url": "http://www.slideshare.net/Tim.Bunce/perl-memory-use-yapcasia2012",
+        "description": "Tim Bunce at YAPC Asia 2012"
+    },
+
+    {
+        "title": "Perl tools for productivity",
+        "url": "http://www.slideshare.net/tudorconstantin/perl-tools-for-productivity",
+        "description": "Tudor Constantin at YAPC::EU 2012"
+    },
+
+    {
+        "title": "Dancing with websockets",
+        "url": "http://www.slideshare.net/dkrotkine/dancing-with-websocket",
+        "description": "<a href='http://www.slideshare.net/dkrotkine'>kkrotkine</a>"
+    },
+
+    {
+        "title": "Baby XS to get you started",
+        "url": "http://www.slideshare.net/joelberger/baby-xs",
+        "description": "Joel Berger at YAPC::NA 2012"
+    },
+
+    {
+        "title": "Statistics and Data Mining with PDL",
+        "url": "http://www.slideshare.net/maggiexyz/statistics-and-data-mining-with-perl-data-language",
+        "description": "Maggie Xiong at YAPC::NA 2012"
+    },
+
+    {
+        "title": "How Perl changed my life",
+        "url": "http://www.slideshare.net/mizzy/how-perl-changed-my-life",
+        "description": "Gosuke Miyashita"
+    }
+
+
+]

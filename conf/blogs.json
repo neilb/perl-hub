@@ -1,0 +1,59 @@
+[
+
+    {
+        "title": "Perl community blogs",
+        "feed": "http://blogs.perl.org/atom.xml",
+        "url": "http://blogs.perl.org/",
+        "type": "atom"
+    },
+
+    {
+        "title": "Modern Perl",
+        "feed": "http://www.modernperlbooks.com/mt/atom.xml",
+        "url": "http://modernperlbooks.com/mt/",
+        "type": "atom"
+    },
+
+    {
+        "title": "dagolden's blog",
+        "feed": "http://www.dagolden.com/index.php/feed/",
+        "url": "http://www.dagolden.com",
+        "type": "rss"
+    },
+
+    {
+        "title": "Tim Bunce's blog",
+        "feed": "http://blog.timbunce.org/feed/",
+        "url": "http://blog.timbunce.org",
+        "type": "rss"
+    },
+
+    {
+        "title": "Gabor Szabo's blog",
+        "feed": "http://feeds.feedburner.com/szabgab",
+        "url": "http://szabgab.com",
+        "type": "rss"
+    },
+
+    {
+        "title": "Yanick Champoux's blog",
+        "feed": "http://babyl.dyndns.org/techblog/atom.xml",
+        "url": "http://babyl.dyndns.org/techblog/",
+        "type": "atom"
+    },
+
+    {
+        "title": "Tatsuhiko Miyagawa's blog",
+        "feed": "http://feeds.bulknews.net/bulknews",
+        "url": "http://weblog.bulknews.net",
+        "type": "rss"
+    },
+
+    {
+        "title": "Matt S Trout's Blog",
+        "feed": "http://shadow.cat/feed/blog/matt-s-trout",
+        "url": "http://shadow.cat/blog/matt-s-trout/",
+        "type": "atom"
+    }
+
+]

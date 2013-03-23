@@ -1,0 +1,176 @@
+#!/usr/local/bin/perl
+use strict;
+use warnings;
+use autodie;
+use File::Slurp;
+use Net::HTTP::Tiny qw(http_get);
+use Template;
+use JSON;
+use XML::Atom::Feed;
+use XML::RSS::LibXML;
+use Text::Markdown 'markdown';
+use DateTime;
+
+my %month = (Jan => 1, Feb => 2, Mar => 3, Apr => 4, May => 5, Jun => 6, Jul => 7, Aug => 8, Sep => 9,
+             Oct => 10, Nov => 11, Dec => 12);
+my $month_regexp = join('|', keys %month);
+my $template     = Template->new({ INCLUDE_PATH => './templates', INTERPOLATE => 0, POST_CHOMP => 0, ENCODING => 'utf8', STRICT => 1 });
+
+my @blogs = read_blog_list();
+my @posts = get_blog_posts(\@blogs);
+my @recent_uploads  = get_recent_cpan_uploads('http://search.cpan.org/uploads.rdf');
+my @recent_ratings  = get_recent_cpan_uploads('http://cpanratings.perl.org/index.rss');
+my @events          = read_json('conf/events.json');
+my @links           = read_json('conf/links.json');
+my @prepan          = get_recent_cpan_uploads('http://prepan.org/feed');
+my @recent_talks    = read_json('conf/talks.json');
+my $fh;
+my $portal_filename = './html/index.html';
+
+splice(@posts, 10);
+splice(@recent_uploads, 10);
+splice(@recent_ratings, 10);
+foreach my $rating (@recent_ratings) {
+    if ($rating->{description} =~ m!^Rating: ([12345]) stars(.{0,80})(.*)$!s) {
+        $rating->{description} = "<img src='stars-$1.png'><br>$2".(length($3) > 0 ? ' [...]' : '');
+    } elsif ($rating->{description} =~ m!^(.{0,80})(.*)!s) {
+        $rating->{description} = $1.( length($2) > 0 ? ' [...]' : '');
+    }
+}
+foreach my $idea (@prepan) {
+    if ($idea->{description} =~ m!^(.{0,80})(.*)!s) {
+        $idea->{description} = $1.( length($2) > 0 ? ' [...]' : '');
+    }
+}
+open($fh, '>', $portal_filename);
+$template->process('homepage.html',
+                    {
+                        blog_posts     => \@posts,
+                        recent_uploads => \@recent_uploads,
+                        recent_ratings => \@recent_ratings,
+                        events         => \@events,
+                        links          => \@links,
+                        prepan         => \@prepan,
+                        recent_talks   => \@recent_talks,
+                    },
+                    $fh);
+close($fh);
+generate_about_page();
+
+sub generate_about_page
+{
+    my $about;
+
+    open($about, '>', 'html/about.html');
+
+    my $md = read_file('README.md');
+    my $html = markdown($md);
+
+    $template->process('header.html', { title => 'About Perl Hub' }, $about);
+    print $about $html;
+    $template->process('footer.html', {}, $about);
+    close($about);
+}
+
+sub get_recent_cpan_uploads
+{
+    my @uploads;
+    my $feed = shift;
+    my $rss  = http_get($feed);
+    get_rss_posts($rss, \@uploads);
+    return @uploads;
+}
+
+sub read_blog_list
+{
+    my $json = read_file('conf/blogs.json');
+    my $blog_listref = JSON::decode_json($json);
+    return @{ $blog_listref };
+}
+
+sub read_json
+{
+    my $json = read_file(shift);
+    my $listref = JSON::decode_json($json);
+
+    return @$listref;
+}
+
+sub get_blog_posts
+{
+    my $blogs = shift;
+    my @posts;
+
+    foreach my $blog (@blogs) {
+        my $content = http_get($blog->{feed});
+        if ($blog->{type} eq 'rss') {
+            get_rss_posts($content, \@posts);
+        } else {
+            get_atom_posts($content, \@posts);
+        }
+    }
+    return sort { $b->{timestamp} cmp $a->{timestamp} } @posts;
+}
+
+sub get_atom_posts
+{
+    my ($atom, $postref) = @_;
+
+    my $feed = XML::Atom::Feed->new(\$atom);
+    foreach my $item ($feed->entries) {
+        push(@$postref, {
+                             title => $item->title,
+                               url => $item->link->href,
+                         timestamp => normalise_timestamp($item->published)
+                         });
+    }
+}
+
+sub get_rss_posts
+{
+    my ($rss, $postref) = @_;
+
+    my $parser = XML::RSS::LibXML->new();
+    $parser->parse($rss) || die "failed to parse RSS\n";
+    foreach my $item (@{ $parser->{items} }) {
+        push(@$postref, {
+                             title => $item->{title},
+                               url => $item->{link},
+                       description => $item->{description},
+                         timestamp => normalise_timestamp($item->{pubDate})
+                         });
+    }
+}
+
+#
+# sigh, after 5 minutes searching, it was quicker to write this than spend the time needed to find the module
+# that did what I wanted. Convert date in this format:
+#   Wed, 20 Mar 2013 23:01:00 -0700
+# to
+#   2013-03-20T16:01:00Z
+#
+
+sub normalise_timestamp
+{
+    my $timestamp = shift;
+
+    return '' unless defined($timestamp);
+    if ($timestamp =~ /^(Mon|Tue|Wed|Thu|Fri|Sat|Sun), (\d\d) ($month_regexp) (\d\d\d\d) (\d\d):(\d\d):(\d\d) ([-+])(\d\d)(\d\d)$/) {
+        my ($weekday, $day, $month_name, $year, $hour, $min, $sec, $plus_or_minus, $hour_delta, $min_delta) = ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);
+        my $dt = DateTime->new(year => $year, month => $month{$month_name}, day => $day, hour => $hour, minute => $min, second => $sec,
+                               time_zone => 'GMT');
+        if ($hour_delta ne '00' || $min_delta ne '00') {
+            $hour_delta =~ s/^0//;
+            $min_delta =~ s/^0//;
+            my $delta = $hour_delta * 60 + $min_delta;
+            if ($plus_or_minus eq '+') {
+                $dt->add(minutes => $delta);
+            } else {
+                $dt->subtract(minutes => $delta);
+            }
+        }
+        $timestamp = "${dt}Z";
+    }
+    return $timestamp;
+}
+

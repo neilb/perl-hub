@@ -1,0 +1,113 @@
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+}
+
+.topBar {
+    background-color: #3b5161;
+    padding: 10px;
+    color: #F4F9FD;
+    height: 40px;
+    font-size: 24pt;
+    position: relative;
+}
+
+.topBar a, .topBar a:active, .topBar a:link, .topBar a:visited, .topBar a:focus, .topBar a:hover {
+    color: #F4F9FD;
+}
+
+.menuBar {
+    color: #A1B0BB;
+    font-size: 18pt;
+    position: absolute;
+    top: 10px;
+    right: 100px;
+}
+
+.menuBar a {
+    text-decoration: none;
+    color: #A1B0BB;
+}
+
+div.feed {
+    background-color: #eaeaea;
+    border-radius: 3px;
+    border: solid 1px #cccccc;
+    display: inline-block;
+    padding: 10px 5px 10px 10px;
+    margin: 10px;
+    width: 200px;
+}
+
+h1.feedTitle {
+    font-size: 14pt;
+    color: #af1c1c;
+    margin: 0 0 10px 0;
+    padding: 4px 4px 4px 0;
+    border-bottom: solid 1px #cccccc;
+}
+
+h2.blogPostTitle {
+    font-size: 10pt;
+    padding: 0;
+    margin: 4px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    font-weight: normal;
+}
+
+.blogPost p {
+    font-size: 9pt;
+    color: #666;
+    padding: 0;
+    margin: 0 0 10px 10px;
+}
+
+div.viewport {
+    max-height: 250px;
+    min-height: 250px;
+    overflow: auto;
+    padding: 0 4px 0 0;
+}
+
+a, a:active, a:link, a:visited, a:focus, a:hover {
+    text-decoration: none;
+    color: #336;
+}
+
+table.mainContent {
+    padding: 20px;
+    width: 100%;
+}
+
+div.linkSection {
+    float: left;
+    display: inline-block;
+    width: 230px;
+    height: 60px;
+    margin: 0px;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+div.linksTitle {
+    font-size: 11pt;
+    color: #333;
+    margin: 3px 3px 6px 3px;
+    font-weight: bold;
+}
+
+div.linkList {
+    font-size: 9pt;
+    margin: 0 0 0 15px;
+    line-height: 125%;
+}
+
+.footer {
+    margin: 10px 0 0 0;
+    border-top: solid 1px #cccccc;
+    padding: 5px;
+    font-size: 10pt;
+    color: #999;
+}

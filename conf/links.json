@@ -1,0 +1,247 @@
+[
+
+    {
+        "title": "Documentation &amp; Tutorials",
+        "links": [
+                    {
+                        "url": "http://learn.perl.org",
+                        "title": "learn.perl.org",
+                        "description": "Some links to help you get started"
+                    },
+                    {
+                        "url": "http://perldoc.perl.org",
+                        "title": "perldoc",
+                        "description": "The perl documentation, online"
+                    },
+                    {
+                        "url": "http://perl5maven.com",
+                        "title": "perl 5 maven",
+                        "description": "Gabor's perl tutorial"
+                    },
+                    {
+                        "url": "http://modernperl.net",
+                        "title": "modern perl",
+                        "description": "chromatic's something-or-other site"
+                    },
+                    {
+                        "url": "http://perladvent.org",
+                        "title": "perl advent",
+                        "description": "Perl advent calendar, with a small lesson every day."
+                    }
+                 ]
+    },
+
+    {
+        "title": "CPAN (Reusable bits of perl)",
+        "links": [
+                    {
+                        "url": "http://cpan.org",
+                        "title": "CPAN",
+                        "description": "The comprehensive perl archive network."
+                    },
+                    {
+                        "url": "http://pause.perl.org",
+                        "title": "PAUSE",
+                        "description": "How you release code onto CPAN."
+                    },
+                    {
+                        "url": "http://cpantesters.org",
+                        "title": "Testers",
+                        "description": "Community-powered testing of CPAN modules"
+                    },
+                    {
+                        "url": "http://mapofcpan.org",
+                        "title": "Map",
+                        "description": "A tree-map view of the CPAN namespaces"
+                    },
+                    {
+                        "url": "http://cpanratings.perl.org",
+                        "title": "Ratings",
+                        "description": "community reviews of modules"
+                    },
+                    {
+                        "url": "http://rt.cpan.org",
+                        "title": "Bugs",
+                        "description": "Bug tracking for CPAN modules"
+                    },
+                    {
+                        "url": "http://annocpan.org",
+                        "title": "Annotations",
+                        "description": "Users' annotations to the documentation for CPAN modules"
+                    },
+                    {
+                        "url": "http://cpan-explorer.org",
+                        "title": "Explorer",
+                        "description": "Visualization of the links between authors and modules"
+                    }
+                 ]
+    },
+
+    {
+        "title": "The Establishment",
+        "links": [
+                    {
+                        "url": "http://perl.org",
+                        "title": "perl.org",
+                        "description": "The Perl home page"
+                    },
+                    {
+                        "url": "http://perlfoundation.org",
+                        "title": "Perl Foundation",
+                        "description": "Perl conference organisers"
+                    }
+                 ]
+    },
+
+    {
+        "title": "Community",
+        "links": [
+                    {
+                        "url": "http://pm.org",
+                        "title": "Perl user groups",
+                        "description": "Perl user groups."
+                    },
+                    {
+                        "url": "http://yapc.org",
+                        "title": "Perl conferences",
+                        "description": "Perl conference organisers"
+                    },
+                    {
+                        "url": "http://lists.perl.org",
+                        "title": "Perl email lists",
+                        "description": "Perl conference organisers"
+                    }
+                 ]
+    },
+
+    {
+        "title": "Q&amp;A and Social",
+        "links": [
+                    {
+                        "url": "http://stackoverflow.com/questions/tagged/perl",
+                        "title": "Stack Overflow",
+                        "description": "Questions tagged 'perl' on Stack Overflow"
+                    },
+                    {
+                        "url": "http://perlmonks.org",
+                        "title": "perl monks",
+                        "description": "Perl Q&amp;A, discussion, and other stuff."
+                    },
+                    {
+                        "url": "http://prepan.org",
+                        "title": "PrePAN",
+                        "description": "Discussion of module ideas before releasing to CPAN"
+                    },
+                    {
+                        "url": "http://cpanforum.com",
+                        "title": "CPAN Forum",
+                        "description": "An online discussion place"
+                    },
+                    {
+                        "url": "http://play-perl.org",
+                        "title": "Play-Perl",
+                        "description": "Share your plans for perl projects"
+                    }
+                 ]
+    },
+
+    {
+        "title": "Blogs",
+        "links": [
+                    {
+                        "url": "http://perl.com",
+                        "title": "Perl.com",
+                        "description": "Collection of perl articles"
+                    },
+                    {
+                        "url": "http://blogs.perl.org",
+                        "title": "blogs.perl.org",
+                        "description": "Blogging platform for perl people"
+                    },
+                    {
+                        "url": "blogs.html",
+                        "title": "Individual perl bloggers",
+                        "description": "A list of perl blogs"
+                    }
+                 ]
+    },
+
+    {
+        "title": "News",
+        "links": [
+                    {
+                        "url": "http://perlweekly.com",
+                        "title": "Perl weekly",
+                        "description": "Weekly collection of links"
+                    },
+                    {
+                        "url": "http://perlbuzz.com",
+                        "title": "Perlbuzz",
+                        "description": "Pointers to links, on twitter too"
+                    },
+                    {
+                        "url": "http://perlnews.org",
+                        "title": "Perl news",
+                        "description": "Another site for perl news"
+                    }
+                 ]
+    },
+
+    {
+        "title": "Web frameworks",
+        "links": [
+                    {
+                        "url": "http://perldancer.org",
+                        "title": "Dancer",
+                        "description": "The Dancer framework"
+                    },
+                    {
+                        "url": "http://mojolicious.org",
+                        "title": "Mojolicious",
+                        "description": "Mojolicious home page"
+                    },
+                    {
+                        "url": "http://catalystframework.org",
+                        "title": "Catalyst",
+                        "description": "Catalyst"
+                    },
+                    {
+                        "url": "https://github.com/iinteractive/OX",
+                        "title": "OX",
+                        "description": "OX doesn't seem to have a home page"
+                    }
+                 ]
+    },
+
+    {
+        "title": "Perl 6",
+        "links": [
+                    {
+                        "url": "http://perl6.org",
+                        "title": "Perl 6 homepage",
+                        "description": "Official homepage for Perl 6 (?)"
+                    },
+                    {
+                        "url": "http://rakudo.org",
+                        "title": "Rakudo",
+                        "description": "Rakudo is one of the perl 6 implementations."
+                    },
+                    {
+                        "url": "http://planetsix.perl.org",
+                        "title": "Planet 6",
+                        "description": "perl 6 blog aggregator"
+                    },
+                    {
+                        "url": "http://perl6maven.com",
+                        "title": "Perl 6 Maven",
+                        "description": "That Gabor gets everywhere..."
+                    },
+                    {
+                        "url": "http://perl6advent.wordpress.com",
+                        "title": "Perl 6 advent",
+                        "description": "Perl advent calendar with perl 6 recipes"
+                    }
+                 ]
+    }
+
+]

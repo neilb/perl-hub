@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>About Perl Hub</title>
+    <link rel=stylesheet href="perl-hub.css" type="text/css">
+</head>
+<body>
+<div class="topBar"><a href="index.html">The Perl Hub</a></div>
+<p>This is a proof-of-concept for a central "perl community hub" - a single place where all perl people can come to find out what's going on in the perl world. The basic idea is</p>
+
+<ul>
+<li>you would log in, using your PAUSE id, twitter, facebook, etc</li>
+<li>you could configure what you'd see on the front page</li>
+<li>you would provide details of your blog, any talks you've given, links to perl resources you've found</li>
+</ul>
+
+<p>This is just a mashup, built with the build-hub script. This does the following</p>
+
+<ul>
+<li>reads the list of perl blogs from conf/blogs.json</li>
+<li>reads the list of upcoming events conf/events.json</li>
+<li>reads the list of talks from conf/talks.json</li>
+<li>reads the list of links to perl resources from conf/links.json</li>
+</ul>
+
+<p>It also grabs various perl related feeds, in some cases munges them, and maps them into the feeds
+at the bottom of the page.</p>
+
+<p>If you want to add your blog, details of talks you've given, or any links I've missed,
+either send me a pull request, or raise an issue on github.</p>
+
+<p>You can read more about the idea on my blog post: </p>
+<div class=footer>
+<a href="about.html">About</a> &bull; 
+<a href="https://github.com/neilbowers/perl-hub">github repo</a> &bull; 
+issues
+</div>
+</body>
+</html>
