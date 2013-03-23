@@ -17,5 +17,5 @@ at the bottom of the page.
 If you want to add your blog, details of talks you've given, or any links I've missed,
 either send me a pull request, or raise an issue on github.
 
-You can read more about the idea on my blog post: 
+You can read more about the idea on my [blog post](http://blogs.perl.org/users/neilb/2013/03/idea-perl-community-homepage.html)
 
