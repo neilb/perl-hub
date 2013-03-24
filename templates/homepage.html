@@ -31,6 +31,16 @@
         </div>
 
         <div class="feed">
+            <h1 class="feedTitle">Stack overflow</h1>
+            <div class=viewport>
+                [% FOREACH question IN stack_overflow %]<div class="blogPost">
+                    <h2 class="blogPostTitle"><a href="[% question.url %]">[% question.title %]</a></h2>
+                    <p class=date>[% question.description %]</p>
+                </div>[% END %]
+            </div>
+        </div>
+
+        <div class="feed">
             <h1 class="feedTitle">CPAN releases</h1>
             <div class=viewport>
                 [% FOREACH upload IN recent_uploads %]<div class="blogPost">

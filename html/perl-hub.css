@@ -84,9 +84,9 @@ table.mainContent {
 div.linkSection {
     float: left;
     display: inline-block;
-    width: 240px;
+    width: 220px;
     height: 70px;
-    margin: 0px;
+    margin: 5px;
     border-radius: 5px;
     padding: 5px;
 }

@@ -24,6 +24,7 @@ my @events          = read_json('conf/events.json');
 my @links           = read_json('conf/links.json');
 my @prepan          = get_prepan_entries();
 my @recent_talks    = read_json('conf/talks.json');
+my @stack_overflow  = get_stack_overflow();
 my $portal_filename = './html/index.html';
 my $fh;
 
@@ -39,6 +40,7 @@ $template->process('homepage.html',
                         links          => \@links,
                         prepan         => \@prepan,
                         recent_talks   => \@recent_talks,
+                        stack_overflow => \@stack_overflow,
                     },
                     $fh);
 close($fh);
@@ -55,6 +57,25 @@ sub get_prepan_entries
     }
 
     return @prepan;
+}
+
+sub get_stack_overflow
+{
+    my (@posts, $content);
+    $content = http_get('http://stackoverflow.com/feeds/tag/perl');
+    get_atom_posts($content, \@posts);
+
+    foreach my $post (@posts) {
+        # SO text has marked escaped by entifying < and > in the markup.
+        # we just strip that all out.
+        $post->{description} =~ s!&lt;.*?&gt;!!gs;
+        $post->{description} =~ s!<.*?>!!gs;
+        $post->{description} =~ s!^\s+!!gs;
+        if ($post->{description} =~ m!^(.{0,80})(.*)!s) {
+            $post->{description} = $1.( length($2) > 0 ? ' [...]' : '');
+        }
+    }
+    return @posts;
 }
 
 sub get_recent_ratings
@@ -142,9 +163,10 @@ sub get_atom_posts
     my $feed = XML::Atom::Feed->new(\$atom);
     foreach my $item ($feed->entries) {
         push(@$postref, {
-                             title => $item->title,
-                               url => $item->link->href,
-                         timestamp => normalise_timestamp($item->published)
+                             title   => $item->title,
+                               url   => $item->link->href,
+                         timestamp   => normalise_timestamp($item->published),
+                         description => $item->summary || '',
                          });
     }
 }
