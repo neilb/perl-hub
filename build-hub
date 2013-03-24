@@ -11,38 +11,25 @@ use XML::RSS::LibXML;
 use Text::Markdown 'markdown';
 use DateTime;
 
-my %month = (Jan => 1, Feb => 2, Mar => 3, Apr => 4, May => 5, Jun => 6, Jul => 7, Aug => 8, Sep => 9,
-             Oct => 10, Nov => 11, Dec => 12);
-my $month_regexp = join('|', keys %month);
-my $template     = Template->new({ INCLUDE_PATH => './templates', INTERPOLATE => 0, POST_CHOMP => 0, ENCODING => 'utf8', STRICT => 1 });
+my %month           = (Jan => 1, Feb => 2, Mar => 3, Apr => 4, May => 5, Jun => 6,
+                       Jul => 7, Aug => 8, Sep => 9, Oct => 10, Nov => 11, Dec => 12);
+my $month_regexp    = join('|', keys %month);
+my $template        = Template->new({ INCLUDE_PATH => './templates', INTERPOLATE => 0, POST_CHOMP => 0, ENCODING => 'utf8', STRICT => 1 });
 
-my @blogs = read_blog_list();
-my @posts = get_blog_posts(\@blogs);
+my @blogs           = read_blog_list();
+my @posts           = get_blog_posts(\@blogs);
 my @recent_uploads  = get_recent_cpan_uploads('http://search.cpan.org/uploads.rdf');
-my @recent_ratings  = get_recent_cpan_uploads('http://cpanratings.perl.org/index.rss');
+my @recent_ratings  = get_recent_ratings();
 my @events          = read_json('conf/events.json');
 my @links           = read_json('conf/links.json');
-my @prepan          = get_recent_cpan_uploads('http://prepan.org/feed');
+my @prepan          = get_prepan_entries();
 my @recent_talks    = read_json('conf/talks.json');
-my $fh;
 my $portal_filename = './html/index.html';
+my $fh;
 
-splice(@posts, 10);
-splice(@recent_uploads, 10);
-splice(@recent_ratings, 10);
-foreach my $rating (@recent_ratings) {
-    if ($rating->{description} =~ m!^Rating: ([12345]) stars(.{0,80})(.*)$!s) {
-        $rating->{description} = "<img src='stars-$1.png'><br>$2".(length($3) > 0 ? ' [...]' : '');
-    } elsif ($rating->{description} =~ m!^(.{0,80})(.*)!s) {
-        $rating->{description} = $1.( length($2) > 0 ? ' [...]' : '');
-    }
-}
-foreach my $idea (@prepan) {
-    if ($idea->{description} =~ m!^(.{0,80})(.*)!s) {
-        $idea->{description} = $1.( length($2) > 0 ? ' [...]' : '');
-    }
-}
+
 open($fh, '>', $portal_filename);
+binmode($fh, ':utf8');
 $template->process('homepage.html',
                     {
                         blog_posts     => \@posts,
@@ -56,6 +43,39 @@ $template->process('homepage.html',
                     $fh);
 close($fh);
 generate_about_page();
+
+sub get_prepan_entries
+{
+    my @prepan = get_recent_cpan_uploads('http://prepan.org/feed');
+
+    foreach my $idea (@prepan) {
+        if ($idea->{description} =~ m!^(.{0,80})(.*)!s) {
+            $idea->{description} = $1.( length($2) > 0 ? ' [...]' : '');
+        }
+    }
+
+    return @prepan;
+}
+
+sub get_recent_ratings
+{
+    my @ratings;
+
+    # TODO: generate a summary page which has a more complete listing
+    #       but still more compact than the ratings site itself?
+    @ratings  = get_recent_cpan_uploads('http://cpanratings.perl.org/index.rss');
+    splice(@ratings, 10);
+
+    foreach my $rating (@ratings) {
+        if ($rating->{description} =~ m!^Rating: ([12345]) stars(.{0,80})(.*)$!s) {
+            $rating->{description} = "<img src='stars-$1.png'><br>$2".(length($3) > 0 ? ' [...]' : '');
+        } elsif ($rating->{description} =~ m!^(.{0,80})(.*)!s) {
+            $rating->{description} = $1.( length($2) > 0 ? ' [...]' : '');
+        }
+    }
+
+    return @ratings;
+}
 
 sub generate_about_page
 {
@@ -78,6 +98,7 @@ sub get_recent_cpan_uploads
     my $feed = shift;
     my $rss  = http_get($feed);
     get_rss_posts($rss, \@uploads);
+    splice(@uploads, 10);
     return @uploads;
 }
 
@@ -109,7 +130,9 @@ sub get_blog_posts
             get_atom_posts($content, \@posts);
         }
     }
-    return sort { $b->{timestamp} cmp $a->{timestamp} } @posts;
+    @posts = sort { $b->{timestamp} cmp $a->{timestamp} } @posts;
+    splice(@posts, 10);
+    return @posts;
 }
 
 sub get_atom_posts
